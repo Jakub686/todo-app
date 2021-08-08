@@ -7,6 +7,7 @@ class TodoApp extends Component {
             <div className="TodoApp">
                 <Router>
                     <>
+                        <HeaderComponent/>
                         <Switch>
                             <Route path="/" exact component={LoginComponent}/>
                             <Route path="/login" component={LoginComponent}/>
@@ -14,6 +15,7 @@ class TodoApp extends Component {
                             <Route path="/todos" component={ListTodosComponent}/>
                             <Route component={ErrorComponent}/>
                         </Switch>
+                        <FooterComponent/>
                     </>
                 </Router>
                 {/* <LoginComponent/>
@@ -23,10 +25,34 @@ class TodoApp extends Component {
     }
 }
 
+class HeaderComponent extends Component {
+    render() {
+        return(
+            <div>
+                Header <hr/>
+            </div>
+        )
+    }
+}
+
+class FooterComponent extends Component {
+    render() {
+        return(
+            <div>
+               <hr/> Footer 
+            </div>
+        )
+    }
+}
+
+
 class WelcomeComponent extends Component {
     render(){
-        return <div>Welcom {this.props.match.params.name}. You can megane Your todos <a href="/todos">here</a>.
+        return( 
+         <div>
+            Welcom {this.props.match.params.name}. You can megane Your todos <Link to="/todos">here</Link>.
         </div>
+        )
     }
 }
 
@@ -36,8 +62,9 @@ class ListTodosComponent extends Component {
         this.state = {
             todos : 
             [
-                {id: 1, description: 'Todo1'},
-                {id: 2, description: 'Todo2'}
+                {id: 1, description: 'Todo1',done:false, targetDate: new Date},
+                {id: 2, description: 'Todo2',done:false, targetDate: new Date},
+                {id: 3, description: 'Todo3',done:false, targetDate: new Date}
             ]
         }
     }
@@ -51,6 +78,8 @@ class ListTodosComponent extends Component {
                          <tr>
                              <th>id</th>
                              <th>description</th>
+                             <th>Target Date</th>
+                             <th>Is Completed?</th>
                          </tr>
                      </thead>
                      <tbody>
@@ -60,6 +89,8 @@ class ListTodosComponent extends Component {
                                     <tr>
                                         <td>{todo.id}</td> 
                                         <td>{todo.description}</td>
+                                        <td>{todo.done.toString()}</td> 
+                                        <td>{todo.targetDate.toString()}</td>
                                     </tr>
                             )
                         }
@@ -81,7 +112,7 @@ class LoginComponent extends Component{
 
         this.state = {
             username: 'in28minutes',
-            password: '',
+            password: 'dummy',
             hasLoginFailed: false,
             showSuccessMessage: false
         }
