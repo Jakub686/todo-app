@@ -28,9 +28,20 @@ class TodoApp extends Component {
 class HeaderComponent extends Component {
     render() {
         return(
-            <div>
-                Header <hr/>
-            </div>
+            <header>
+                <nav className="navbar navbar-expand-md">
+                    <div><a>in28minutes</a></div>
+                    <ul className="navbar-nav">
+                        <li className="navbar-nav">Home</li>
+                        <li className="navbar-nav">Todos</li>
+                    </ul>
+                    <ul  className="navbar-nav">
+                        <li className="nav-link">Login</li>
+                        <li className="nav-link">Logout</li>
+                    </ul>        
+                </nav>
+            </header>
+
         )
     }
 }
@@ -50,7 +61,7 @@ class WelcomeComponent extends Component {
     render(){
         return( 
          <div>
-            Welcom {this.props.match.params.name}. You can megane Your todos <Link to="/todos">here</Link>.
+            Welcome {this.props.match.params.name}. You can megane Your todos <Link to="/todos">here</Link>.
         </div>
         )
     }
@@ -145,9 +156,9 @@ class LoginComponent extends Component{
         //in28minutes,dummy
         console.log(this.state)
         if(this.state.username==='in28minutes' && this.state.password==='dummy'){
-            this.props.history.push(`/Welcom/${this.state.username}`)
+            this.props.history.push(`/Welcome/${this.state.username}`)
             // console.log('Successful')
-            // this.setState({showSuccessMessage:true})
+            // this.setState({showSuccessMessage:true})s
             // this.setState({hasLoginFailed:false})
         }
         else{
