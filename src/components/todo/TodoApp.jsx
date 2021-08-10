@@ -32,10 +32,10 @@ class HeaderComponent extends Component {
                 <nav className="navbar navbar-expand-md">
                     <div><a>in28minutes</a></div>
                     <ul className="navbar-nav">
-                        <li className="navbar-nav">Home</li>
-                        <li className="navbar-nav">Todos</li>
+                        <li className="navbar-link">Home</li>
+                        <li className="navbar-link">Todos</li>
                     </ul>
-                    <ul  className="navbar-nav">
+                    <ul  className="navbar-nav navbar-collapse justyfi-content-end">
                         <li className="nav-link">Login</li>
                         <li className="nav-link">Logout</li>
                     </ul>        
