@@ -13,6 +13,7 @@ class TodoApp extends Component {
                             <Route path="/login" component={LoginComponent}/>
                             <Route path="/welcome/:name" component={WelcomeComponent}/>
                             <Route path="/todos" component={ListTodosComponent}/>
+                            <Route path="/logout" component={LogoutComponent}/>
                             <Route component={ErrorComponent}/>
                         </Switch>
                         <FooterComponent/>
@@ -29,15 +30,15 @@ class HeaderComponent extends Component {
     render() {
         return(
             <header>
-                <nav className="navbar navbar-expand-md">
-                    <div><a>in28minutes</a></div>
+                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                    <div><a href="http://www.in28minutes.com" className="navbar-brand">in28minutes</a></div>
                     <ul className="navbar-nav">
-                        <li className="navbar-link">Home</li>
-                        <li className="navbar-link">Todos</li>
+                        <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>
+                        <li><Link className="nav-link" to="/todos">Todo</Link></li>
                     </ul>
-                    <ul  className="navbar-nav navbar-collapse justyfi-content-end">
-                        <li className="nav-link">Login</li>
-                        <li className="nav-link">Logout</li>
+                    <ul  className="navbar-nav navbar-collapse justify-content-end">
+                        <li><Link className="nav-link" to="/login">Login</Link></li>
+                        <li><Link className="nav-link" to="/Logout">Logout</Link></li>
                     </ul>        
                 </nav>
             </header>
@@ -49,9 +50,22 @@ class HeaderComponent extends Component {
 class FooterComponent extends Component {
     render() {
         return(
-            <div>
+            <footer className="footer">
+                <span className="text-muted">All Rights Reserved 2021</span>
                <hr/> Footer 
-            </div>
+            </footer>
+        )
+    }
+}
+class LogoutComponent extends Component {
+    render() {
+        return(
+            <>
+               <h1>You are logged out</h1> 
+               <div className="container">
+                   Thank you for using out application.
+               </div>
+            </>
         )
     }
 }
@@ -59,11 +73,15 @@ class FooterComponent extends Component {
 
 class WelcomeComponent extends Component {
     render(){
-        return( 
-         <div>
-            Welcome {this.props.match.params.name}. You can megane Your todos <Link to="/todos">here</Link>.
-        </div>
-        )
+        return(
+            <>
+                <h1>Welcome!</h1>
+                <div class="container">
+                Welcome {this.props.match.params.name}.
+                 You can megane Your todos <Link to="/todos">here</Link>.
+                </div>
+            </>
+        )        
     }
 }
 
@@ -84,29 +102,31 @@ class ListTodosComponent extends Component {
         return(
              <div>
                  <h1>List todos</h1>
-                 <table>
-                     <thead>
-                         <tr>
-                             <th>id</th>
-                             <th>description</th>
-                             <th>Target Date</th>
-                             <th>Is Completed?</th>
-                         </tr>
-                     </thead>
-                     <tbody>
-                        {
-                            this.state.todos.map(
-                                todo =>
-                                    <tr>
-                                        <td>{todo.id}</td> 
-                                        <td>{todo.description}</td>
-                                        <td>{todo.done.toString()}</td> 
-                                        <td>{todo.targetDate.toString()}</td>
-                                    </tr>
-                            )
-                        }
-                     </tbody>
-                </table>
+                 <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                {/* <th>id</th> */}
+                                <th>description</th>
+                                <th>Target Date</th>
+                                <th>Is Completed?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.todos.map(
+                                    todo =>
+                                        <tr>
+                                            {/* <td>{todo.id}</td>  */}
+                                            <td>{todo.description}</td>
+                                            <td>{todo.done.toString()}</td> 
+                                            <td>{todo.targetDate.toString()}</td>
+                                        </tr>
+                                )
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )    
     }
@@ -174,13 +194,16 @@ class LoginComponent extends Component{
 
         return(
             <div>
+                <h1>Login</h1>
+                <div className="container">
                 {/* <ShowInvalidCredentials hasLoginFailed={this.hasLoginFailed}/> */}
-                {this.hasLoginFailed && <div>Invalid Credentials</div>}
+                {this.hasLoginFailed && <div className="alert-alert-warning">Invalid Credentials</div>}
                 {this.state.showSuccessMessage && <div>Login Successful</div>}
                 {/* <ShowLoginSuccessMessage showLoginSuccessMessage={this.state.ShowLoginSuccessMessage}/> */}
                 User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
                 Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
-                <button onClick={this.loginClicked}>Login</button>
+                <button className="btn btn" onClick={this.loginClicked}>Login</button>
+                </div>
             </div>
         )
     }
