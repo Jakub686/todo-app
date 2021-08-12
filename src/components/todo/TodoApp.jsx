@@ -29,17 +29,19 @@ class TodoApp extends Component {
 
 class HeaderComponent extends Component {
     render() {
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn()
+            console.log(isUserLoggedIn)
         return(
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                     <div><a href="http://www.in28minutes.com" className="navbar-brand">in28minutes</a></div>
                     <ul className="navbar-nav">
-                        <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>
-                        <li><Link className="nav-link" to="/todos">Todos</Link></li>
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
-                        <li><Link className="nav-link" to="/login">Login</Link></li>
-                        <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>
+                        {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
                     </ul>
                 </nav>
             </header>
@@ -87,11 +89,11 @@ class ListTodosComponent extends Component {
         return (
             <div>
                  <h1>List Todos</h1>
-                 <div class="container">
-                    <table class="table">
+                 <div className="container">
+                    <table className="table">
                         <thead>
                             <tr>
-                                <th>description</th>
+                                <th>Description</th>
                                 <th>Target Date</th>
                                 <th>Is Completed?</th>
                             </tr>
@@ -100,7 +102,7 @@ class ListTodosComponent extends Component {
                         {
                             this.state.todos.map (
                                 todo =>
-                                    <tr>
+                                    <tr key={todo.id}>
                                         <td>{todo.description}</td>
                                         <td>{todo.done.toString()}</td>
                                         <td>{todo.targetDate.toString()}</td>
@@ -121,7 +123,7 @@ class WelcomeComponent extends Component {
         return (
             <>
                 <h1>Welcome!</h1>
-                <div class="container">
+                <div className="container">
                 Welcome {this.props.match.params.name}. You can manage your todos <Link to="/todos">here</Link>.
                 </div>
             </>
