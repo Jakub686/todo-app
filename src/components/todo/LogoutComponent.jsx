@@ -12,4 +12,5 @@ class LogoutComponent extends Component {
         )
     }
 }
+
 export default LogoutComponent

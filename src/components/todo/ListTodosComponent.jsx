@@ -1,6 +1,4 @@
 import React, {Component} from 'react'
-// import AuthenticationService from './AuthenticationService.js'
-
 
 class ListTodosComponent extends Component {
     constructor(props){
@@ -25,7 +23,7 @@ class ListTodosComponent extends Component {
                             <tr>
                                 <th>Description</th>
                                 <th>Target Date</th>
-                                <th>Is Completed?</th>
+                                <th>IsCompleted?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,4 +44,5 @@ class ListTodosComponent extends Component {
         )
     }
 }
+
 export default ListTodosComponent
