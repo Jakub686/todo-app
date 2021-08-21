@@ -1,5 +1,3 @@
-import React, {Component} from 'react'
-
 class AuthenticationService {
 
     registerSuccessfulLogin(username,password){
@@ -15,6 +13,12 @@ class AuthenticationService {
         let user = sessionStorage.getItem('authenticatedUser')
         if(user===null) return false
         return true
+    }
+
+    getLoggedInUserName() {
+        let user = sessionStorage.getItem('authenticatedUser')
+        if(user===null) return ''
+        return user
     }
 }
 
